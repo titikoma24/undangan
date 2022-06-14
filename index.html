@@ -609,6 +609,34 @@
     <script>
       AOS.init();
     </script>
+    
+    <script type="text/javascript">
+    function playAudio() {
+        var source = "music.mp3";
+        var audio = document.createElement("audioNotifikasi");
+        audio.autoplay = true;
+        audio.load()
+        audio.addEventListener("load", function() { 
+            audio.play(); 
+        }, true);
+        audio.src = source;
+    }
+
+    function cekNotifikasi() {
+        $.ajax({url: "http://url/to/notifikasi", 
+                success: function(totnotif) {
+    
+                if (totnotif > 0) {
+                    //play sound
+                    playAudio();
+                }
+    
+                setTimeout(function(){ cekNotifikasi();}, 60000);//60 detik
+            }
+        });
+    }
+
+</script>
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
